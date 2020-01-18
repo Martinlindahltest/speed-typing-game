@@ -18,7 +18,7 @@ function App() {
 
   const [textarea, setTextarea] = useState('placeholder')
   const [timeRemaining, setTimeRemaining] = useState(5)
-  const [gamestarted, setGameStarted] = useState(false)
+  const [isTimeRunning, setisTimeRunning] = useState(false)
 
 
 
@@ -34,7 +34,7 @@ function App() {
 
 
   useEffect(() => {
-    if (timeRemaining > 0 && gamestarted) {
+    if (timeRemaining > 0 && isTimeRunning) {
       setTimeout(() => {
         setTimeRemaining(timeRemaining - 1)
       }, 1000);
@@ -43,9 +43,14 @@ function App() {
     console.log('useffect')
     console.log(timeRemaining)
 
-  }, [timeRemaining, gamestarted]);
+  }, [timeRemaining, isTimeRunning]);
+
+  if (timeRemaining === 0 && isTimeRunning === true) {
+    setisTimeRunning(false)
+  }
 
 
+  console.log('isTimeRunning', isTimeRunning)
 
 
 
@@ -54,7 +59,7 @@ function App() {
       <h1>Titel</h1>
       <textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
       <h4>tid kvar: {timeRemaining}</h4>
-      <button onClick={() => setGameStarted(true)}>Start:</button>
+      <button onClick={() => setisTimeRunning(true)}>Start:</button>
       <h1>Hur många ord: {calculateWordCount(textarea)}</h1>
     </div>
   );
