@@ -12,24 +12,31 @@
  */
 
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 function App() {
 
   const [textarea, setTextarea] = useState('placeholder')
+  const [timeRemaining, setTimeRemaining] = useState(5)
+
 
   //console.log(textarea)
 
-  let antalOrdITextarea = textarea.split(' ').length;
+  function calculateWordCount(input) {
+    const wordsArr = input.trim().split(" ")
+    const filteredWords = wordsArr.filter(word => word !== "")
+    return filteredWords.length
+  }
+
 
 
   return (
     <div className="App">
       <h1>Titel</h1>
       <textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
-      <h4>tid kvar:</h4>
-      <button onClick={() => console.log(antalOrdITextarea)}>Start:</button>
-      <h1>Hur många ord:</h1>
+      <h4>tid kvar: {timeRemaining}</h4>
+      <button onClick={() => console.log(calculateWordCount(textarea))}>Start:</button>
+      <h1>Hur många ord: {calculateWordCount(textarea)}</h1>
     </div>
   );
 }
