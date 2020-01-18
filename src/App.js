@@ -20,6 +20,7 @@ function App() {
   const [timeRemaining, setTimeRemaining] = useState(5)
 
 
+
   //console.log(textarea)
 
   function calculateWordCount(input) {
@@ -30,12 +31,27 @@ function App() {
 
 
 
+  useEffect(() => {
+    if (timeRemaining > 0) {
+      setTimeout(() => {
+        setTimeRemaining(timeRemaining - 1)
+      }, 1000);
+    }
+
+    console.log('useffect')
+    console.log(timeRemaining)
+
+  }, [timeRemaining]);
+
+
+
+
   return (
     <div className="App">
       <h1>Titel</h1>
       <textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
       <h4>tid kvar: {timeRemaining}</h4>
-      <button onClick={() => console.log(calculateWordCount(textarea))}>Start:</button>
+      <button onClick={() => console.log('startbutton')}>Start:</button>
       <h1>Hur många ord: {calculateWordCount(textarea)}</h1>
     </div>
   );
