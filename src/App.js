@@ -20,6 +20,7 @@ function App() {
 
   //console.log(textarea)
 
+  let antalOrdITextarea = textarea.split(' ').length;
 
 
   return (
@@ -27,7 +28,7 @@ function App() {
       <h1>Titel</h1>
       <textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
       <h4>tid kvar:</h4>
-      <button>Start:</button>
+      <button onClick={() => console.log(antalOrdITextarea)}>Start:</button>
       <h1>Hur många ord:</h1>
     </div>
   );
