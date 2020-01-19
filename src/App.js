@@ -12,13 +12,20 @@
  */
 
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 function App() {
 
+  const STARTING_TIME = 5
+
+
   const [textarea, setTextarea] = useState('placeholder')
-  const [timeRemaining, setTimeRemaining] = useState(1)
+  const [timeRemaining, setTimeRemaining] = useState(STARTING_TIME)
   const [isTimeRunning, setisTimeRunning] = useState(false)
+  const inputRef = useRef(null)
+
+
+
 
 
 
@@ -43,7 +50,7 @@ function App() {
     }
 
     if (timeRemaining === 0) {
-      setTimeRemaining(3)
+      setTimeRemaining(STARTING_TIME)
 
     }
 
@@ -66,6 +73,8 @@ function App() {
   console.log('isTimeRunning', isTimeRunning)
 
   function handleButtonClick() {
+    inputRef.current.disabled = false
+    inputRef.current.focus()
     setTextarea('')
     setisTimeRunning(true)
   }
@@ -76,7 +85,7 @@ function App() {
   return (
     <div className="App">
       <h1>Titel</h1>
-      <textarea value={textarea} disabled={!isTimeRunning} onChange={(e) => setTextarea(e.target.value)} />
+      <textarea ref={inputRef} value={textarea} disabled={!isTimeRunning} onChange={(e) => setTextarea(e.target.value)} />
       <h4>tid kvar: {timeRemaining}</h4>
       <button disabled={isTimeRunning} onClick={() => handleButtonClick()}>Start:</button>
       <h1>Hur många ord: {antalOrd}</h1>
