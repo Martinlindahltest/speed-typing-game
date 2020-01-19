@@ -17,7 +17,7 @@ import React, { useState, useEffect } from 'react';
 function App() {
 
   const [textarea, setTextarea] = useState('placeholder')
-  const [timeRemaining, setTimeRemaining] = useState(5)
+  const [timeRemaining, setTimeRemaining] = useState(1)
   const [isTimeRunning, setisTimeRunning] = useState(false)
 
 
@@ -30,6 +30,8 @@ function App() {
     return filteredWords.length
   }
 
+  let antalOrd = '???'
+
 
 
 
@@ -40,27 +42,44 @@ function App() {
       }, 1000);
     }
 
+    if (timeRemaining === 0) {
+      setTimeRemaining(3)
+
+    }
+
     console.log('useffect')
     console.log(timeRemaining)
 
   }, [timeRemaining, isTimeRunning]);
 
+
+
   if (timeRemaining === 0 && isTimeRunning === true) {
     setisTimeRunning(false)
   }
 
+  if (isTimeRunning === false) {
+    antalOrd = calculateWordCount(textarea)
+  }
+
 
   console.log('isTimeRunning', isTimeRunning)
+
+  function handleButtonClick() {
+    setTextarea('')
+    setisTimeRunning(true)
+  }
+
 
 
 
   return (
     <div className="App">
       <h1>Titel</h1>
-      <textarea value={textarea} onChange={(e) => setTextarea(e.target.value)} />
+      <textarea value={textarea} disabled={!isTimeRunning} onChange={(e) => setTextarea(e.target.value)} />
       <h4>tid kvar: {timeRemaining}</h4>
-      <button onClick={() => setisTimeRunning(true)}>Start:</button>
-      <h1>Hur många ord: {calculateWordCount(textarea)}</h1>
+      <button disabled={isTimeRunning} onClick={() => handleButtonClick()}>Start:</button>
+      <h1>Hur många ord: {antalOrd}</h1>
     </div>
   );
 }
