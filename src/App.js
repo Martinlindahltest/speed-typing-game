@@ -24,13 +24,6 @@ function App() {
   const [isTimeRunning, setisTimeRunning] = useState(false)
   const inputRef = useRef(null)
 
-
-
-
-
-
-  //console.log(textarea)
-
   function calculateWordCount(input) {
     const wordsArr = input.trim().split(" ")
     const filteredWords = wordsArr.filter(word => word !== "")
@@ -38,9 +31,6 @@ function App() {
   }
 
   let antalOrd = '???'
-
-
-
 
   useEffect(() => {
     if (timeRemaining > 0 && isTimeRunning) {
@@ -54,12 +44,7 @@ function App() {
 
     }
 
-    console.log('useffect')
-    console.log(timeRemaining)
-
   }, [timeRemaining, isTimeRunning]);
-
-
 
   if (timeRemaining === 0 && isTimeRunning === true) {
     setisTimeRunning(false)
@@ -69,18 +54,12 @@ function App() {
     antalOrd = calculateWordCount(textarea)
   }
 
-
-  console.log('isTimeRunning', isTimeRunning)
-
   function handleButtonClick() {
     inputRef.current.disabled = false
     inputRef.current.focus()
     setTextarea('')
     setisTimeRunning(true)
   }
-
-
-
 
   return (
     <div className="App">
